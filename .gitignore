@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.mp4
+
+# Large / unused media assets
+src/assets/*
+!src/assets/vm_tile.png
+!src/assets/office bearers.jpg
+!src/assets/loki header.jpg
+!src/assets/1.png
+!src/assets/Untitled design.png
+!src/assets/tempad.png
+!src/assets/Natalie Holt - TVA (From Loki) - MarvelMusicVEVO.mp3
+!src/assets/Gemini_Generated_Image_yb961syb961syb96.png
+!src/assets/vite.svg
+!src/assets/react.svg
+
+# Root level unused duplicates
+/navbar.png
+/tempad.png
+/vm tile.png
