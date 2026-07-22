@@ -84,9 +84,12 @@ export default function Hero() {
           
           <div className="h-[2px] w-24 bg-tva-orange mx-auto mb-6 shadow-[0_0_8px_#F5A524]" />
           
-          <p className="text-base md:text-xl lg:text-2xl text-tva-orange/90 tracking-[0.1em] uppercase">
-            In association with <span className="font-black text-tva-amber animate-pulse">A.R.M.E</span>
-          </p>
+          <div className="text-xs md:text-sm lg:text-base text-tva-orange/90 tracking-[0.15em] uppercase flex flex-col items-center space-y-1">
+            <span className="font-bold">Mechanical Engineering Department</span>
+            <span className="text-[10px] md:text-xs text-tva-orange/50 lowercase italic font-sans">and</span>
+            <span className="font-black text-tva-amber animate-pulse text-sm md:text-base lg:text-lg tracking-[0.2em]">A.R.M.E</span>
+            <span className="text-[10px] md:text-[11px] text-tva-orange/60 tracking-[0.15em] mt-2 border-t border-tva-orange/20 pt-2 px-4 font-bold">[ JOINTLY PRESENTS ]</span>
+          </div>
         </motion.div>
 
         {/* Bottom: Scroll Prompt */}

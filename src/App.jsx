@@ -8,7 +8,7 @@ import OfficeBearers from './components/OfficeBearers';
 import { Volume2, VolumeX, ShieldAlert, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tvaThemeMusic from './assets/piq_site_music.mp3';
-import introVideo from './assets/inro.mp4';
+import introVideo from './assets/torq_intro.mp4';
 
 export default function App() {
   const [isBooted, setIsBooted] = useState(false);
