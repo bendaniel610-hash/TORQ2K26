@@ -124,12 +124,17 @@ export default function Events() {
         </div>
 
         {/* Large Single TemPad Device Frame */}
-        <div className="relative w-full max-w-4xl mx-auto aspect-[667/374] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
+        <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
           
           {/* TemPad Frame Image Background */}
           <div 
-            className="absolute inset-0 bg-cover bg-center pointer-events-none"
-            style={{ backgroundImage: `url(${tempadImg})` }}
+            className="absolute inset-0 pointer-events-none"
+            style={{ 
+              backgroundImage: `url(${tempadImg})`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
           />
 
           {/* Interactive Button Hotspots directly mapped over screen rows */}

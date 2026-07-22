@@ -4,12 +4,12 @@ import { ShieldCheck, UserCheck, Activity, Award } from 'lucide-react';
 
 export default function OfficeBearers() {
   const bearers = [
-    { name: 'AKSHAYA S', role: 'PRESIDENT', code: 'OB-01 // PRES' },
-    { name: 'RICHARD SANTHOSH JERRY R', role: 'VICE-PRESIDENT', code: 'OB-02 // V_PRES' },
-    { name: 'MAMTHA', role: 'PUBLIC RELATIONS OFFICER', code: 'OB-03 // PRO' },
-    { name: 'PRITHIV', role: 'TREASURER', code: 'OB-04 // TREAS' },
-    { name: 'NOEL JHON P', role: 'PUBLICITY & COMMUNICATION', code: 'OB-05 // PUB_COMM' },
-    { name: 'SWATHI G', role: 'GENERAL SECRETARY', code: 'OB-06 // GEN_SEC' },
+    { name: 'RAVEESHWAR', role: 'PRESIDENT', code: 'OB-01 // PRES' },
+    { name: 'BOOMIKA', role: 'VICE-PRESIDENT', code: 'OB-02 // V_PRES' },
+    { name: 'MUJAHID', role: 'PUBLIC RELATIONS OFFICER', code: 'OB-03 // PRO' },
+    { name: 'KATHERIN JULIET', role: 'TREASURER', code: 'OB-04 // TREAS' },
+    { name: 'ANDREW SAM', role: 'PUBLICITY & COMMUNICATIONS', code: 'OB-05 // PUB_COMM' },
+    { name: 'ADELIN SHWETA', role: 'GENERAL SECRETARY', code: 'OB-06 // GEN_SEC' },
   ];
 
   const containerVariants = {
