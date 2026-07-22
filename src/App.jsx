@@ -31,10 +31,14 @@ export default function App() {
   // Start Intro Video (with sound)
   const startBoot = () => {
     setIsBooted(true);
-    if (videoRef.current) {
+  };
+
+  // Play the video once it is booted and mounted
+  useEffect(() => {
+    if (isBooted && videoRef.current) {
       videoRef.current.play().catch(err => console.log("Video playback failed:", err));
     }
-  };
+  }, [isBooted]);
 
   // Handle Intro End or Skip
   const handleIntroEnd = () => {
@@ -111,6 +115,7 @@ export default function App() {
               src={introVideo}
               className="w-full h-full object-cover"
               onEnded={handleIntroEnd}
+              autoPlay
               playsInline
             />
             {/* Skip video control details */}
