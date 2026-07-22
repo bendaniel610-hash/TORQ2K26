@@ -36,6 +36,8 @@ src/assets/*
 !src/assets/Gemini_Generated_Image_yb961syb961syb96.png
 !src/assets/vite.svg
 !src/assets/react.svg
+!src/assets/hero_logo.png
+!src/assets/navbar.png
 
 # Root level unused duplicates
 /navbar.png

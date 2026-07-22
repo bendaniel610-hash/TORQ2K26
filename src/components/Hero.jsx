@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import heroImg from '../assets/1.png';
-import torqTextImg from '../assets/Untitled design.png';
+import heroLogoImg from '../assets/hero_logo.png';
 
 export default function Hero() {
   const containerVariants = {
@@ -53,14 +53,21 @@ export default function Hero() {
         animate="visible"
         className="relative z-20 max-w-5xl mx-auto px-6 w-full flex flex-col items-center justify-between text-center space-y-12"
       >
-        {/* Top: Logo & System status info */}
-        <motion.div variants={itemVariants} className="flex flex-col items-center space-y-4">
+        {/* Top: Hanging Logo & System status info */}
+        <motion.div 
+          variants={itemVariants} 
+          className="relative flex flex-col items-center pt-24 w-full"
+        >
+          {/* Glowing support cables hanging from the top */}
+          <div className="absolute top-0 left-[22%] md:left-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+          <div className="absolute top-0 right-[22%] md:right-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+
           <img 
-            src={torqTextImg} 
-            alt="TORQ" 
-            className="w-[280px] md:w-[420px] h-auto object-contain filter drop-shadow-[0_0_20px_rgba(245,165,36,0.5)] mix-blend-screen animate-pulse-glow"
+            src={heroLogoImg} 
+            alt="TORQ 2K26" 
+            className="w-[300px] md:w-[480px] h-auto object-contain filter drop-shadow-[0_0_25px_rgba(245,165,36,0.35)] transition-transform duration-300 hover:scale-[1.02]"
           />
-          <div className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-tva-orange/80 border border-tva-orange/30 px-3 py-1 bg-black/40 rounded uppercase">
+          <div className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-tva-orange/80 border border-tva-orange/30 px-3 py-1 bg-black/40 rounded uppercase mt-6 z-10">
             VER: 2K26 // DEPT: MECHANICAL // STATUS: ACTIVE
           </div>
         </motion.div>

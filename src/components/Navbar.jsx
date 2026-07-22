@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldAlert, LogIn } from 'lucide-react';
-import navBarImg from '../assets/loki header.jpg';
+import { ShieldAlert } from 'lucide-react';
+import navbarImg from '../assets/navbar.png';
 
 export default function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 120) {
+        setShowNavbar(true);
+      } else {
+        setShowNavbar(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'SEC-01: HERO', href: '#hero' },
@@ -23,72 +36,81 @@ export default function Navbar() {
   };
 
   return (
-    <div 
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center pointer-events-auto"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <motion.div
-        animate={{
-          width: isHovered ? '90vw' : '150px',
-          maxWidth: isHovered ? '620px' : '150px',
-          opacity: isHovered ? 1.0 : 0.25,
-          borderColor: isHovered ? '#F5A524' : 'rgba(245,165,36,0.3)',
-          boxShadow: isHovered 
-            ? '0 0 20px rgba(245, 165, 36, 0.4)' 
-            : '0 0 5px rgba(245, 165, 36, 0.1)',
-        }}
-        transition={{ type: 'spring', stiffness: 120, damping: 17 }}
-        className="relative h-12 bg-black/95 border rounded-md flex items-center justify-between px-4 overflow-hidden select-none cursor-pointer tva-glow-border font-mono"
-      >
-        {/* Background image overlay */}
-        <div 
-          className="absolute inset-0 opacity-20 pointer-events-none mix-blend-color-dodge bg-cover bg-center"
-          style={{ backgroundImage: `url(${navBarImg})` }}
-        />
+    <AnimatePresence>
+      {showNavbar && (
+        <motion.div 
+          initial={{ opacity: 0, y: -50, x: '-50%' }}
+          animate={{ opacity: 1, y: 0, x: '-50%' }}
+          exit={{ opacity: 0, y: -50, x: '-50%' }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="fixed top-2 left-1/2 z-50 flex items-center justify-center pointer-events-auto"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <motion.div
+            animate={{
+              width: isHovered ? '620px' : '150px',
+              height: isHovered ? '95px' : '85px',
+              boxShadow: isHovered 
+                ? '0 0 25px rgba(245, 165, 36, 0.45)' 
+                : '0 0 10px rgba(245, 165, 36, 0.15)',
+            }}
+            transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+            className="relative border border-tva-orange/15 rounded-lg overflow-hidden select-none cursor-pointer font-mono"
+            style={{
+              backgroundImage: `url(${navbarImg})`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
+            {/* Dark tint overlay over screen to blend navigation */}
+            <div className="absolute inset-0 bg-black/10 hover:bg-black/5 transition-colors pointer-events-none" />
 
-        {/* Branding (Always visible) */}
-        <div className="flex items-center space-x-1.5 z-10 shrink-0">
-          <ShieldAlert size={14} className="text-tva-orange animate-pulse" />
-          <span className="text-[11px] tracking-widest text-tva-orange font-bold">
-            TVA.TORQ
-          </span>
-        </div>
-
-        {/* Stretched Content: Menu and Navigation Links (shown only on hover) */}
-        <div className="flex items-center justify-end w-full overflow-hidden">
-          <AnimatePresence>
-            {isHovered && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center space-x-4 md:space-x-5 z-10 pl-4 w-full justify-end"
-              >
-                {navLinks.map((link, idx) => (
-                  <motion.a
-                    key={idx}
-                    href={link.href}
-                    onClick={(e) => handleScroll(e, link.href)}
-                    whileHover={{ scale: 1.05, color: '#FF8C00' }}
-                    className="text-[10px] md:text-xs text-tva-orange/80 tracking-wider hover:text-tva-orange transition-colors uppercase whitespace-nowrap"
+            {/* Inner screen content area */}
+            <div className="absolute left-[12%] right-[12%] top-[12%] bottom-[20%] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                {!isHovered ? (
+                  /* Collapsed state: Small branding pulsing */
+                  <motion.div
+                    key="collapsed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex items-center space-x-1 text-tva-orange font-bold text-[10px] tracking-widest animate-pulse"
                   >
-                    {link.name.split(': ')[1]}
-                  </motion.a>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Small lock detail to the right when collapsed */}
-        {!isHovered && (
-          <div className="text-[8px] text-tva-orange/45 font-bold tracking-widest pl-1 shrink-0 z-10 border-l border-tva-orange/20 ml-2">
-            [LOC]
-          </div>
-        )}
-      </motion.div>
-    </div>
+                    <ShieldAlert size={12} className="text-tva-amber" />
+                    <span>TVA_SYS</span>
+                  </motion.div>
+                ) : (
+                  /* Expanded state: Menu Links */
+                  <motion.div
+                    key="expanded"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="flex items-center justify-around w-full px-2"
+                  >
+                    {navLinks.map((link, idx) => (
+                      <a
+                        key={idx}
+                        href={link.href}
+                        onClick={(e) => handleScroll(e, link.href)}
+                        className="text-[9px] md:text-[11px] text-tva-orange font-bold tracking-wider hover:text-tva-orange transition-colors uppercase whitespace-nowrap px-1.5 py-0.5 border border-transparent hover:border-tva-orange/30 hover:bg-tva-orange/5 rounded"
+                      >
+                        {link.name.split(': ')[1]}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
+            {/* SCANLINES OVERLAY */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-30" />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

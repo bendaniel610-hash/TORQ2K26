@@ -57,71 +57,74 @@ export default function VisionMission() {
           <motion.div
             variants={cardVariants}
             whileHover={{ scale: 1.02 }}
-            className="relative rounded-md overflow-hidden border border-tva-orange/30 group tva-glow-border h-80 flex flex-col justify-end"
+            className="relative w-full aspect-[667/374] overflow-hidden"
+            style={{
+              backgroundImage: `url(${vmTileImg})`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
           >
-            {/* Tile Image Background with Dark Overlay */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-              style={{ backgroundImage: `url(${vmTileImg})` }}
-            />
-            {/* Dark gradient mask for legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/30 group-hover:via-black/85 transition-all duration-300" />
-
-            {/* Card Content */}
-            <div className="relative p-8 z-10 flex flex-col space-y-3">
+            {/* Card Content - positioned inside the tile's grid area */}
+            <div className="absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between">
               <div className="flex items-center space-x-3 text-tva-orange">
-                <div className="p-2 border border-tva-orange/40 rounded bg-tva-orange/10 group-hover:bg-tva-orange/20 transition-all shadow-[0_0_10px_rgba(245,165,36,0.2)]">
-                  <Compass size={22} className="animate-spin-slow" />
+                <div className="p-1.5 border border-tva-orange/40 rounded bg-tva-orange/10 transition-all shadow-[0_0_8px_rgba(245,165,36,0.15)]">
+                  <Compass size={18} className="animate-spin-slow" />
                 </div>
-                <h3 className="text-xl font-bold tracking-widest text-tva-orange tva-glow-text uppercase">
+                <h3 className="text-sm md:text-base lg:text-lg font-black tracking-widest text-tva-orange tva-glow-text uppercase">
                   VISION_LOG
                 </h3>
               </div>
-              <p className="text-tva-orange/85 text-xs md:text-sm leading-relaxed text-justify group-hover:text-tva-orange transition-colors font-sans">
+              <p className="text-tva-orange/85 text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans flex-grow flex items-center pt-2">
                 To inspire young engineers to innovate, collaborate, and create high-efficiency, sustainable solutions 
                 for the future, aligning technical breakthroughs with ethical standards and absolute temporal excellence.
               </p>
-              <div className="text-[9px] text-tva-orange/35 tracking-widest font-bold text-right pt-2 font-mono">
-                INDEX_REF: VIS.001
+              <div className="text-[8px] md:text-[9px] text-tva-orange/40 tracking-widest font-bold text-right pt-2 font-mono">
+                INDEX_REF: VIS.881
               </div>
             </div>
+            
+            {/* Scanlines overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
           </motion.div>
 
           {/* Mission Card */}
           <motion.div
             variants={cardVariants}
             whileHover={{ scale: 1.02 }}
-            className="relative rounded-md overflow-hidden border border-tva-orange/30 group tva-glow-border h-80 flex flex-col justify-end"
+            className="relative w-full aspect-[667/374] overflow-hidden"
+            style={{
+              backgroundImage: `url(${vmTileImg})`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
           >
-            {/* Tile Image Background with Dark Overlay */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-              style={{ backgroundImage: `url(${vmTileImg})` }}
-            />
-            {/* Dark gradient mask for legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/30 group-hover:via-black/85 transition-all duration-300" />
-
-            {/* Card Content */}
-            <div className="relative p-8 z-10 flex flex-col space-y-3">
+            {/* Card Content - positioned inside the tile's grid area */}
+            <div className="absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between">
               <div className="flex items-center space-x-3 text-tva-orange">
-                <div className="p-2 border border-tva-orange/40 rounded bg-tva-orange/10 group-hover:bg-tva-orange/20 transition-all shadow-[0_0_10px_rgba(245,165,36,0.2)]">
-                  <Target size={22} className="animate-pulse" />
+                <div className="p-1.5 border border-tva-orange/40 rounded bg-tva-orange/10 transition-all shadow-[0_0_8px_rgba(245,165,36,0.15)]">
+                  <Target size={18} className="animate-pulse" />
                 </div>
-                <h3 className="text-xl font-bold tracking-widest text-tva-orange tva-glow-text uppercase">
+                <h3 className="text-sm md:text-base lg:text-lg font-black tracking-widest text-tva-orange tva-glow-text uppercase">
                   MISSION_LOG
                 </h3>
               </div>
-              <p className="text-tva-orange/85 text-xs md:text-sm leading-relaxed text-justify group-hover:text-tva-orange transition-colors font-sans">
+              <p className="text-tva-orange/85 text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans flex-grow flex items-center pt-2">
                 To provide a unified platform for advanced skill development, direct industry collaboration, and engineering 
                 innovation, while fostering teamwork, creativity, and practical problem-solving to protect the timeline of advancement.
               </p>
-              <div className="text-[9px] text-tva-orange/35 tracking-widest font-bold text-right pt-2 font-mono">
-                INDEX_REF: MIS.002
+              <div className="text-[8px] md:text-[9px] text-tva-orange/40 tracking-widest font-bold text-right pt-2 font-mono">
+                INDEX_REF: MIS.882
               </div>
             </div>
+
+            {/* Scanlines overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
           </motion.div>
 
         </div>
+
       </motion.div>
     </section>
   );
