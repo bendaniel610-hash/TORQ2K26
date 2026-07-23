@@ -113,7 +113,7 @@ export default function App() {
             <video
               ref={videoRef}
               src={introVideo}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain bg-black"
               onEnded={handleIntroEnd}
               autoPlay
               playsInline

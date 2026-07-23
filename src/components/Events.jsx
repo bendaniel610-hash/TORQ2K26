@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tempadImg from '../assets/tempad.png';
 
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const eventList = [
     {
       id: 1,
-      name: 'GEAR UP',
+      name: 'IRON NEXUS',
       subtitle: 'Lathe Machining Challenge',
       date: 'August 23, 2026',
       time: '10:00 AM - 12:00 PM',
@@ -28,11 +18,11 @@ export default function Events() {
         'Participants must wear workshop safety gear (shoes mandatory).',
         'Judging criteria: Dimensional accuracy, surface finish, and time taken.',
       ],
-      code: 'EV-01 // GEAR_UP',
+      code: 'EV-01 // IRON_NEXUS',
     },
     {
       id: 2,
-      name: 'PAPER PRESENTATION',
+      name: 'CHRONICLES OF THE MULTIVERSE',
       subtitle: 'Research & Technical Presentation',
       date: 'August 23, 2026',
       time: '10:30 AM - 12:30 PM',
@@ -42,25 +32,25 @@ export default function Events() {
         'Presentation time: 8 minutes + 2 minutes Q&A.',
         'IEEE format preferred for paper submission.',
       ],
-      code: 'EV-02 // PAPER_PRESENTATION',
+      code: 'EV-02 // CHRONICLES_OF_THE_MULTIVERSE',
     },
     {
       id: 3,
-      name: 'BEAMS $ BRILLIANCE',
-      subtitle: 'Structural load bearing challenge',
+      name: 'MISS MINUTES CHALLANGE',
+      subtitle: 'Technical & Logical Quiz',
       date: 'August 23, 2026',
-      time: '12:00 PM - 2:00 PM',
+      time: '12:00 PM - 1:30 PM',
       rules: [
-        'Teams of 3–4 members.',
-        'Building materials will be provided on the spot.',
-        'Structures must adhere to specified clear span and width dimensions.',
-        'Winning design is based on the highest load-to-weight ratio.',
+        'Teams of 2 members.',
+        'Multiple rounds testing aptitude, logic, and core mechanical engineering concepts.',
+        'Top teams will enter the rapid-fire timeline final.',
+        'Organizers decision is final and binding.',
       ],
-      code: 'EV-03 // BEAMS_AND_BRILLIANCE',
+      code: 'EV-03 // MISS_MINUTES_CHALLANGE',
     },
     {
       id: 4,
-      name: 'WATER ROCKETRY',
+      name: 'BIFROST LAUNCH',
       subtitle: 'Aerodynamic Launch Challenge',
       date: 'August 23, 2026',
       time: '1:30 PM - 3:30 PM',
@@ -70,11 +60,11 @@ export default function Events() {
         'Launch pad will be provided by organizers.',
         'No pre-fabricated metal parts or ready-made launchers allowed.',
       ],
-      code: 'EV-04 // WATER_ROCKETRY',
+      code: 'EV-04 // BIFROST_LAUNCH',
     },
     {
       id: 5,
-      name: 'CAD',
+      name: 'BLUEPRINTS OF ASGUARD',
       subtitle: '3D CAD Modeling Contest',
       date: 'August 23, 2026',
       time: '2:00 PM - 4:00 PM',
@@ -84,11 +74,25 @@ export default function Events() {
         'The drawing sheet will be given at the start of the event.',
         'Scoring is based on accuracy, speed, and clean design tree methodology.',
       ],
-      code: 'EV-05 // CAD_DESIGN',
+      code: 'EV-05 // BLUEPRINTS_OF_ASGUARD',
     },
     {
       id: 6,
-      name: '3D PRINTING',
+      name: 'SACRED BRIDGE',
+      subtitle: 'Brands to Brilliance Challenge',
+      date: 'August 23, 2026',
+      time: '12:00 PM - 2:00 PM',
+      rules: [
+        'Teams of 2–3 members.',
+        'Select a brand and pitch an innovative engineering or marketing strategy.',
+        'Presentation time: 7 minutes + 2 minutes Q&A.',
+        'Judging criteria: Innovation, brand value integration, and presentation style.',
+      ],
+      code: 'EV-06 // SACRED_BRIDGE',
+    },
+    {
+      id: 7,
+      name: "LOKI'S FOUNDRY",
       subtitle: 'Additive Manufacturing Workshop',
       date: 'August 23, 2026',
       time: '10:00 AM - 12:30 PM',
@@ -98,11 +102,11 @@ export default function Events() {
         'Conducted by industry experts.',
         'E-certificates will be provided to all registered attendees.',
       ],
-      code: 'WK-01 // 3D_PRINTING',
+      code: 'WK-01 // LOKIS_FOUNDRY',
     },
     {
-      id: 7,
-      name: 'HVAC DESIGN',
+      id: 8,
+      name: 'ZERO KELVIN',
       subtitle: 'Heating, Ventilation & Air Conditioning',
       date: 'August 23, 2026',
       time: '1:30 PM - 4:00 PM',
@@ -112,7 +116,7 @@ export default function Events() {
         'Conducted by senior HVAC design engineers.',
         'E-certificates will be provided to all registered attendees.',
       ],
-      code: 'WK-02 // HVAC_DESIGN',
+      code: 'WK-02 // ZERO_KELVIN',
     },
   ];
 
@@ -133,110 +137,68 @@ export default function Events() {
           <div className="h-[1px] w-16 bg-tva-orange mx-auto mt-4 shadow-[0_0_8px_#F5A524]" />
         </div>
 
-        {!isMobile ? (
-          /* Desktop View: Large Single TemPad Device Frame */
-          <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
-            
-            {/* TemPad Frame Image Background */}
-            <div 
-              className="absolute inset-0 pointer-events-none"
-              style={{ 
-                backgroundImage: `url(${tempadImg})`,
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-              }}
-            />
+        {/* Large Single TemPad Device Frame */}
+        <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
+          
+          {/* TemPad Frame Image Background */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center pointer-events-none"
+            style={{ backgroundImage: `url(${tempadImg})` }}
+          />
 
-            {/* Interactive Button Hotspots directly mapped over screen rows */}
-            {/* 1. GEAR UP */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[0])}
-              className="absolute left-[28.3%] top-[30%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="Gear Up"
-            />
-            {/* 2. PAPER PRESENTATION */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[1])}
-              className="absolute left-[28.3%] top-[38.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="Paper Presentation"
-            />
-            {/* 3. BEAMS $ BRILLIANCE */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[2])}
-              className="absolute left-[28.3%] top-[47%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="Beams $ Brilliance"
-            />
-            {/* 4. WATER ROCKETRY */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[3])}
-              className="absolute left-[28.3%] top-[55.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="Water Rocketry"
-            />
-            {/* 5. CAD */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[4])}
-              className="absolute left-[28.3%] top-[64%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="CAD"
-            />
-            {/* 6. 3D PRINTING */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[5])}
-              className="absolute left-[59.2%] top-[30%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="3D Printing Workshop"
-            />
-            {/* 7. HVAC DESIGN */}
-            <button 
-              onClick={() => setSelectedEvent(eventList[6])}
-              className="absolute left-[59.2%] top-[38.5%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-              title="HVAC Design Workshop"
-            />
+          {/* Interactive Button Hotspots directly mapped over screen rows */}
+          {/* 1. IRON NEXUS */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[0])}
+            className="absolute left-[28.3%] top-[30%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Iron Nexus"
+          />
+          {/* 2. CHRONICLES OF THE MULTIVERSE */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[1])}
+            className="absolute left-[28.3%] top-[38.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Chronicles of the Multiverse"
+          />
+          {/* 3. MISS MINUTES CHALLANGE */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[2])}
+            className="absolute left-[28.3%] top-[47%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Miss Minutes Challenge"
+          />
+          {/* 4. BIFROST LAUNCH */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[3])}
+            className="absolute left-[28.3%] top-[55.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Bifrost Launch"
+          />
+          {/* 5. BLUEPRINTS OF ASGUARD */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[4])}
+            className="absolute left-[28.3%] top-[64%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Blueprints of Asguard"
+          />
+          {/* 6. SACRED BRIDGE (NEXUS NETWORK on console) */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[5])}
+            className="absolute left-[28.3%] top-[72.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Sacred Bridge"
+          />
+          {/* 7. LOKI'S FOUNDRY */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[6])}
+            className="absolute left-[59.2%] top-[30%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Loki's Foundry"
+          />
+          {/* 8. ZERO KELVIN */}
+          <button 
+            onClick={() => setSelectedEvent(eventList[7])}
+            className="absolute left-[59.2%] top-[38.5%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            title="Zero Kelvin"
+          />
 
-            {/* CRT Screen Scanline Overlay on device */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-25 z-20" />
-          </div>
-        ) : (
-          /* Mobile View: Beautiful List of Event Cards simulating a TemPad screen */
-          <div className="w-full max-w-md mx-auto flex flex-col space-y-4 px-2">
-            <div className="border border-tva-orange/30 rounded-lg p-4 md:p-6 bg-tva-nearblack/90 tva-glow-border relative overflow-hidden">
-              {/* Scanline overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
-              
-              <div className="text-[10px] text-tva-orange/60 border-b border-tva-orange/20 pb-2 mb-4 tracking-wider flex items-center justify-between font-bold">
-                <span>TEMPAD_V1 // LOCAL_DIRECTORY</span>
-                <span className="text-green-500 animate-pulse">[ONLINE]</span>
-              </div>
-              
-              <div className="flex flex-col space-y-3">
-                {eventList.map((event) => (
-                  <button
-                    key={event.id}
-                    onClick={() => setSelectedEvent(event)}
-                    className="w-full flex flex-col p-4 border border-tva-orange/15 rounded bg-black/60 hover:border-tva-orange/40 text-left transition-all duration-200 group active:bg-tva-orange/5"
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <span className="text-[11px] font-black tracking-wider text-tva-orange group-hover:tva-glow-text transition-all uppercase">
-                        {event.name}
-                      </span>
-                      <span className="text-[8px] text-tva-orange/40 font-mono">
-                        {event.code.split(' // ')[0]}
-                      </span>
-                    </div>
-                    <div className="text-[9px] text-tva-orange/65 font-sans tracking-wide mt-1.5 leading-relaxed">
-                      {event.subtitle}
-                    </div>
-                    <div className="flex items-center justify-between w-full mt-4 pt-2.5 border-t border-tva-orange/10 text-[8px] text-tva-orange/40 font-mono">
-                      <span>{event.time}</span>
-                      <span className="text-tva-orange flex items-center gap-1 font-bold">
-                        ACCESS_LOG ➔
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+          {/* CRT Screen Scanline Overlay on device */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-25 z-20" />
+        </div>
 
         {/* Modal Pop-up for selected event details */}
         <AnimatePresence>

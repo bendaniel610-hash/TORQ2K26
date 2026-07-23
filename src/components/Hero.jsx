@@ -58,9 +58,9 @@ export default function Hero() {
           variants={itemVariants} 
           className="relative flex flex-col items-center pt-24 w-full"
         >
-          {/* Glowing support cables hanging from the top - hidden on mobile for clean look */}
-          <div className="hidden md:block absolute top-0 left-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
-          <div className="hidden md:block absolute top-0 right-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+          {/* Glowing support cables hanging from the top */}
+          <div className="absolute top-0 left-[22%] md:left-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+          <div className="absolute top-0 right-[22%] md:right-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
 
           <img 
             src={heroLogoImg} 
