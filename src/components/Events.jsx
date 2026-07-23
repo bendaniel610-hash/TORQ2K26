@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tempadImg from '../assets/tempad.png';
 
 export default function Events() {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const eventList = [
     {
@@ -123,67 +133,110 @@ export default function Events() {
           <div className="h-[1px] w-16 bg-tva-orange mx-auto mt-4 shadow-[0_0_8px_#F5A524]" />
         </div>
 
-        {/* Large Single TemPad Device Frame */}
-        <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
-          
-          {/* TemPad Frame Image Background */}
-          <div 
-            className="absolute inset-0 pointer-events-none"
-            style={{ 
-              backgroundImage: `url(${tempadImg})`,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
+        {!isMobile ? (
+          /* Desktop View: Large Single TemPad Device Frame */
+          <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
+            
+            {/* TemPad Frame Image Background */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{ 
+                backgroundImage: `url(${tempadImg})`,
+                backgroundSize: '100% 100%',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
 
-          {/* Interactive Button Hotspots directly mapped over screen rows */}
-          {/* 1. GEAR UP */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[0])}
-            className="absolute left-[28.3%] top-[30%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="Gear Up"
-          />
-          {/* 2. PAPER PRESENTATION */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[1])}
-            className="absolute left-[28.3%] top-[38.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="Paper Presentation"
-          />
-          {/* 3. BEAMS $ BRILLIANCE */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[2])}
-            className="absolute left-[28.3%] top-[47%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="Beams $ Brilliance"
-          />
-          {/* 4. WATER ROCKETRY */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[3])}
-            className="absolute left-[28.3%] top-[55.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="Water Rocketry"
-          />
-          {/* 5. CAD */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[4])}
-            className="absolute left-[28.3%] top-[64%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="CAD"
-          />
-          {/* 6. 3D PRINTING */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[5])}
-            className="absolute left-[59.2%] top-[30%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="3D Printing Workshop"
-          />
-          {/* 7. HVAC DESIGN */}
-          <button 
-            onClick={() => setSelectedEvent(eventList[6])}
-            className="absolute left-[59.2%] top-[38.5%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
-            title="HVAC Design Workshop"
-          />
+            {/* Interactive Button Hotspots directly mapped over screen rows */}
+            {/* 1. GEAR UP */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[0])}
+              className="absolute left-[28.3%] top-[30%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="Gear Up"
+            />
+            {/* 2. PAPER PRESENTATION */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[1])}
+              className="absolute left-[28.3%] top-[38.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="Paper Presentation"
+            />
+            {/* 3. BEAMS $ BRILLIANCE */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[2])}
+              className="absolute left-[28.3%] top-[47%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="Beams $ Brilliance"
+            />
+            {/* 4. WATER ROCKETRY */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[3])}
+              className="absolute left-[28.3%] top-[55.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="Water Rocketry"
+            />
+            {/* 5. CAD */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[4])}
+              className="absolute left-[28.3%] top-[64%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="CAD"
+            />
+            {/* 6. 3D PRINTING */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[5])}
+              className="absolute left-[59.2%] top-[30%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="3D Printing Workshop"
+            />
+            {/* 7. HVAC DESIGN */}
+            <button 
+              onClick={() => setSelectedEvent(eventList[6])}
+              className="absolute left-[59.2%] top-[38.5%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+              title="HVAC Design Workshop"
+            />
 
-          {/* CRT Screen Scanline Overlay on device */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-25 z-20" />
-        </div>
+            {/* CRT Screen Scanline Overlay on device */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-25 z-20" />
+          </div>
+        ) : (
+          /* Mobile View: Beautiful List of Event Cards simulating a TemPad screen */
+          <div className="w-full max-w-md mx-auto flex flex-col space-y-4 px-2">
+            <div className="border border-tva-orange/30 rounded-lg p-4 md:p-6 bg-tva-nearblack/90 tva-glow-border relative overflow-hidden">
+              {/* Scanline overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px] pointer-events-none z-20 opacity-20" />
+              
+              <div className="text-[10px] text-tva-orange/60 border-b border-tva-orange/20 pb-2 mb-4 tracking-wider flex items-center justify-between font-bold">
+                <span>TEMPAD_V1 // LOCAL_DIRECTORY</span>
+                <span className="text-green-500 animate-pulse">[ONLINE]</span>
+              </div>
+              
+              <div className="flex flex-col space-y-3">
+                {eventList.map((event) => (
+                  <button
+                    key={event.id}
+                    onClick={() => setSelectedEvent(event)}
+                    className="w-full flex flex-col p-4 border border-tva-orange/15 rounded bg-black/60 hover:border-tva-orange/40 text-left transition-all duration-200 group active:bg-tva-orange/5"
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className="text-[11px] font-black tracking-wider text-tva-orange group-hover:tva-glow-text transition-all uppercase">
+                        {event.name}
+                      </span>
+                      <span className="text-[8px] text-tva-orange/40 font-mono">
+                        {event.code.split(' // ')[0]}
+                      </span>
+                    </div>
+                    <div className="text-[9px] text-tva-orange/65 font-sans tracking-wide mt-1.5 leading-relaxed">
+                      {event.subtitle}
+                    </div>
+                    <div className="flex items-center justify-between w-full mt-4 pt-2.5 border-t border-tva-orange/10 text-[8px] text-tva-orange/40 font-mono">
+                      <span>{event.time}</span>
+                      <span className="text-tva-orange flex items-center gap-1 font-bold">
+                        ACCESS_LOG ➔
+                      </span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Modal Pop-up for selected event details */}
         <AnimatePresence>

@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Compass } from 'lucide-react';
 import vmTileImg from '../assets/vm_tile.png';
 
 export default function VisionMission() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -57,16 +67,22 @@ export default function VisionMission() {
           <motion.div
             variants={cardVariants}
             whileHover={{ scale: 1.02 }}
-            className="relative w-full aspect-[667/374] overflow-hidden"
-            style={{
+            className={isMobile 
+              ? "relative w-full border border-tva-orange/30 rounded-lg p-5 bg-tva-nearblack/90 tva-glow-border overflow-hidden" 
+              : "relative w-full aspect-[667/374] overflow-hidden"
+            }
+            style={isMobile ? {} : {
               backgroundImage: `url(${vmTileImg})`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
           >
-            {/* Card Content - positioned inside the tile's grid area */}
-            <div className="absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between">
+            {/* Card Content - positioned relative or inside the tile's grid area */}
+            <div className={isMobile 
+              ? "flex flex-col space-y-4 text-tva-orange" 
+              : "absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between"
+            }>
               <div className="flex items-center space-x-3 text-tva-orange">
                 <div className="p-1.5 border border-tva-orange/40 rounded bg-tva-orange/10 transition-all shadow-[0_0_8px_rgba(245,165,36,0.15)]">
                   <Compass size={18} className="animate-spin-slow" />
@@ -75,7 +91,7 @@ export default function VisionMission() {
                   VISION_LOG
                 </h3>
               </div>
-              <p className="text-tva-orange/85 text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans flex-grow flex items-center pt-2">
+              <p className="text-tva-orange/85 text-xs md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans">
                 To inspire young engineers to innovate, collaborate, and create high-efficiency, sustainable solutions 
                 for the future, aligning technical breakthroughs with ethical standards and absolute temporal excellence.
               </p>
@@ -92,16 +108,22 @@ export default function VisionMission() {
           <motion.div
             variants={cardVariants}
             whileHover={{ scale: 1.02 }}
-            className="relative w-full aspect-[667/374] overflow-hidden"
-            style={{
+            className={isMobile 
+              ? "relative w-full border border-tva-orange/30 rounded-lg p-5 bg-tva-nearblack/90 tva-glow-border overflow-hidden" 
+              : "relative w-full aspect-[667/374] overflow-hidden"
+            }
+            style={isMobile ? {} : {
               backgroundImage: `url(${vmTileImg})`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
           >
-            {/* Card Content - positioned inside the tile's grid area */}
-            <div className="absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between">
+            {/* Card Content - positioned relative or inside the tile's grid area */}
+            <div className={isMobile 
+              ? "flex flex-col space-y-4 text-tva-orange" 
+              : "absolute left-[8%] right-[8%] top-[10%] bottom-[12%] p-5 z-10 flex flex-col justify-between"
+            }>
               <div className="flex items-center space-x-3 text-tva-orange">
                 <div className="p-1.5 border border-tva-orange/40 rounded bg-tva-orange/10 transition-all shadow-[0_0_8px_rgba(245,165,36,0.15)]">
                   <Target size={18} className="animate-pulse" />
@@ -110,7 +132,7 @@ export default function VisionMission() {
                   MISSION_LOG
                 </h3>
               </div>
-              <p className="text-tva-orange/85 text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans flex-grow flex items-center pt-2">
+              <p className="text-tva-orange/85 text-xs md:text-[11px] lg:text-xs leading-relaxed text-justify font-sans">
                 To provide a unified platform for advanced skill development, direct industry collaboration, and engineering 
                 innovation, while fostering teamwork, creativity, and practical problem-solving to protect the timeline of advancement.
               </p>
