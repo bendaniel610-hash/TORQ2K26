@@ -138,61 +138,70 @@ export default function Events() {
         </div>
 
         {/* Large Single TemPad Device Frame */}
-        <div className="relative w-full max-w-4xl mx-auto aspect-[629/317] border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
+        <div className="relative w-full max-w-4xl mx-auto border border-tva-orange/30 rounded-lg overflow-hidden shadow-2xl tva-glow-border bg-black">
           
           {/* TemPad Frame Image Background */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center pointer-events-none"
-            style={{ backgroundImage: `url(${tempadImg})` }}
+          <img 
+            src={tempadImg} 
+            alt="TemPad Console" 
+            className="w-full h-auto block pointer-events-none"
           />
 
           {/* Interactive Button Hotspots directly mapped over screen rows */}
           {/* 1. IRON NEXUS */}
           <button 
             onClick={() => setSelectedEvent(eventList[0])}
-            className="absolute left-[28.3%] top-[30%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '34.70%', width: '30.5%', height: '3.79%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Iron Nexus"
           />
           {/* 2. CHRONICLES OF THE MULTIVERSE */}
           <button 
             onClick={() => setSelectedEvent(eventList[1])}
-            className="absolute left-[28.3%] top-[38.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '40.38%', width: '30.5%', height: '5.68%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Chronicles of the Multiverse"
           />
           {/* 3. MISS MINUTES CHALLANGE */}
           <button 
             onClick={() => setSelectedEvent(eventList[2])}
-            className="absolute left-[28.3%] top-[47%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '47.63%', width: '30.5%', height: '3.79%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Miss Minutes Challenge"
           />
           {/* 4. BIFROST LAUNCH */}
           <button 
             onClick={() => setSelectedEvent(eventList[3])}
-            className="absolute left-[28.3%] top-[55.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '53.31%', width: '30.5%', height: '6.94%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Bifrost Launch"
           />
           {/* 5. BLUEPRINTS OF ASGUARD */}
           <button 
             onClick={() => setSelectedEvent(eventList[4])}
-            className="absolute left-[28.3%] top-[64%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '60.88%', width: '30.5%', height: '3.79%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Blueprints of Asguard"
           />
           {/* 6. SACRED BRIDGE (NEXUS NETWORK on console) */}
           <button 
             onClick={() => setSelectedEvent(eventList[5])}
-            className="absolute left-[28.3%] top-[72.5%] w-[30.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '28.3%', top: '65.62%', width: '30.5%', height: '6.94%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Sacred Bridge"
           />
           {/* 7. LOKI'S FOUNDRY */}
           <button 
             onClick={() => setSelectedEvent(eventList[6])}
-            className="absolute left-[59.2%] top-[30%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '59.2%', top: '35.02%', width: '29.5%', height: '4.10%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Loki's Foundry"
           />
           {/* 8. ZERO KELVIN */}
           <button 
             onClick={() => setSelectedEvent(eventList[7])}
-            className="absolute left-[59.2%] top-[38.5%] w-[29.5%] h-[8.5%] cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
+            style={{ left: '59.2%', top: '41.01%', width: '29.5%', height: '7.89%' }}
+            className="absolute cursor-pointer bg-transparent hover:bg-tva-orange/15 border border-transparent hover:border-tva-orange/30 rounded transition-all focus:outline-none z-30"
             title="Zero Kelvin"
           />
 
