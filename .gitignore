@@ -39,6 +39,9 @@ src/assets/*
 !src/assets/react.svg
 !src/assets/hero_logo.png
 !src/assets/navbar.png
+!src/assets/licet_logo.png
+!src/assets/arme_logo.png
+!src/assets/intro_mobile_version.mp4
 
 # Root level unused duplicates
 /navbar.png
