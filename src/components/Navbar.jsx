@@ -8,6 +8,33 @@ export default function Navbar() {
   const [showNavbar, setShowNavbar] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Target event date: August 8, 2026
+  const targetDate = new Date('2026-08-08T00:00:00');
+
+  const calculateTimeLeft = () => {
+    const difference = +targetDate - +new Date();
+    let timeLeft = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      total: 0
+    };
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+        total: difference
+      };
+    }
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 120) {
@@ -26,27 +53,16 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', checkMobile);
 
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', checkMobile);
+      clearInterval(timer);
     };
   }, []);
-
-  const navLinks = [
-    { name: 'SEC-01: HERO', href: '#hero' },
-    { name: 'SEC-02: LOGS', href: '#about' },
-    { name: 'SEC-03: MISSION', href: '#vision' },
-    { name: 'SEC-04: EVENTS', href: '#events' },
-    { name: 'SEC-05: REGISTRY', href: '#bearers' },
-  ];
-
-  const handleScroll = (e, href) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -80,49 +96,76 @@ export default function Navbar() {
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              backgroundColor: 'transparent',
             }}
           >
             {/* Dark tint overlay over screen to blend navigation */}
             <div className="absolute inset-0 bg-black/10 hover:bg-black/5 transition-colors pointer-events-none" />
 
             {/* Inner screen content area */}
-            <div className="absolute left-[12%] right-[12%] top-[12%] bottom-[20%] flex items-center justify-center">
+            <div className="absolute left-[8%] right-[8%] top-[8%] bottom-[10%] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 {!isHovered ? (
-                  /* Collapsed state: Small branding pulsing */
+                  /* Collapsed state: Pulsing compact countdown indicator */
                   <motion.div
                     key="collapsed"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center space-x-1 text-tva-orange font-bold text-[9px] md:text-[10px] tracking-widest animate-pulse"
+                    className="flex items-center space-x-1.5 text-tva-orange font-bold text-[11px] md:text-[13px] tracking-widest animate-pulse"
                   >
-                    <ShieldAlert size={10} className="text-tva-amber" />
-                    <span>TVA_SYS</span>
+                    <ShieldAlert size={12} className="text-tva-amber" />
+                    <span>
+                      {timeLeft.total > 0 ? `T-MINUS: ${timeLeft.days}D` : 'TVA_LIVE'}
+                    </span>
                   </motion.div>
                 ) : (
-                  /* Expanded state: Menu Links */
+                  /* Expanded state: Detailed digital timer count */
                   <motion.div
                     key="expanded"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="flex items-center justify-around w-full px-1 sm:px-2"
+                    className="flex items-center justify-center gap-2 md:gap-4 w-full px-1 text-tva-orange font-bold font-mono uppercase"
                   >
-                    {navLinks.map((link, idx) => (
-                      <a
-                        key={idx}
-                        href={link.href}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleScroll(e, link.href);
-                          setIsHovered(false);
-                        }}
-                        className="text-[7px] xs:text-[9px] md:text-[11px] text-tva-orange font-bold tracking-wider hover:text-tva-orange transition-colors uppercase whitespace-nowrap px-1 py-0.5 border border-transparent hover:border-tva-orange/30 hover:bg-tva-orange/5 rounded"
-                      >
-                        {link.name.split(': ')[1]}
-                      </a>
-                    ))}
+                    <div className="text-[8px] xs:text-[10px] sm:text-[12px] md:text-[13px] text-tva-orange/60 tracking-wider">
+                      {timeLeft.total > 0 ? 'TEMPORAL MELTDOWN IN:' : 'THE TIME LINE IS STABILIZED //'}
+                    </div>
+                    {timeLeft.total > 0 ? (
+                      <div className="flex items-center gap-1 md:gap-1.5">
+                        <div className="flex flex-col items-center">
+                          <span className="bg-tva-orange/10 border border-tva-orange/30 px-1 py-0.5 sm:px-1.5 rounded text-[10px] xs:text-[11px] sm:text-[13px] md:text-[15px] min-w-[22px] sm:min-w-[28px] md:min-w-[32px] text-center font-black">
+                            {String(timeLeft.days).padStart(2, '0')}
+                          </span>
+                          <span className="text-[5px] md:text-[7px] text-tva-orange/50 mt-0.5 tracking-tighter">DAYS</span>
+                        </div>
+                        <span className="text-[9px] md:text-[12px] text-tva-orange/50 mb-3">:</span>
+                        <div className="flex flex-col items-center">
+                          <span className="bg-tva-orange/10 border border-tva-orange/30 px-1 py-0.5 sm:px-1.5 rounded text-[10px] xs:text-[11px] sm:text-[13px] md:text-[15px] min-w-[22px] sm:min-w-[28px] md:min-w-[32px] text-center font-black">
+                            {String(timeLeft.hours).padStart(2, '0')}
+                          </span>
+                          <span className="text-[5px] md:text-[7px] text-tva-orange/50 mt-0.5 tracking-tighter">HOURS</span>
+                        </div>
+                        <span className="text-[9px] md:text-[12px] text-tva-orange/50 mb-3">:</span>
+                        <div className="flex flex-col items-center">
+                          <span className="bg-tva-orange/10 border border-tva-orange/30 px-1 py-0.5 sm:px-1.5 rounded text-[10px] xs:text-[11px] sm:text-[13px] md:text-[15px] min-w-[22px] sm:min-w-[28px] md:min-w-[32px] text-center font-black">
+                            {String(timeLeft.minutes).padStart(2, '0')}
+                          </span>
+                          <span className="text-[5px] md:text-[7px] text-tva-orange/50 mt-0.5 tracking-tighter">MINS</span>
+                        </div>
+                        <span className="text-[9px] md:text-[12px] text-tva-orange/50 mb-3">:</span>
+                        <div className="flex flex-col items-center">
+                          <span className="bg-tva-orange/10 border border-tva-orange/30 px-1 py-0.5 sm:px-1.5 rounded text-[10px] xs:text-[11px] sm:text-[13px] md:text-[15px] min-w-[22px] sm:min-w-[28px] md:min-w-[32px] text-center font-black">
+                            {String(timeLeft.seconds).padStart(2, '0')}
+                          </span>
+                          <span className="text-[5px] md:text-[7px] text-tva-orange/50 mt-0.5 tracking-tighter">SECS</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-[10px] sm:text-[12px] md:text-[14px] bg-tva-orange/15 px-2 py-0.5 border border-tva-orange/30 rounded text-center animate-pulse font-black tracking-widest">
+                        EVENT IS LIVE
+                      </div>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

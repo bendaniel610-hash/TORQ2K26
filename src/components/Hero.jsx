@@ -59,8 +59,8 @@ export default function Hero() {
           className="relative flex flex-col items-center pt-24 w-full"
         >
           {/* Glowing support cables hanging from the top */}
-          <div className="absolute top-0 left-[22%] md:left-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
-          <div className="absolute top-0 right-[22%] md:right-[35%] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+          <div className="absolute top-0 left-[calc(50%-75px)] sm:left-[calc(50%-95px)] md:left-[calc(50%-145px)] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
+          <div className="absolute top-0 left-[calc(50%+75px)] sm:left-[calc(50%+95px)] md:left-[calc(50%+145px)] w-[1.5px] h-24 bg-gradient-to-b from-transparent via-tva-orange/70 to-tva-orange shadow-[0_0_8px_#F5A524]" />
 
           <img 
             src={heroLogoImg} 
@@ -90,6 +90,16 @@ export default function Hero() {
             <span className="font-black text-tva-amber animate-pulse text-xs sm:text-base lg:text-lg tracking-[0.2em]">A.R.M.E</span>
             <span className="text-[9px] sm:text-[11px] text-tva-orange/60 tracking-[0.15em] mt-2 border-t border-tva-orange/20 pt-2 px-4 font-bold">[ JOINTLY PRESENTS ]</span>
           </div>
+
+          {/* Click Here to Register button */}
+          <a
+            href="https://forms.gle/r4vCfcco7F1t38hd7"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-8 px-6 py-2 border border-tva-orange bg-tva-orange/10 hover:bg-tva-orange text-tva-orange hover:text-black font-black text-[10px] sm:text-xs tracking-[0.25em] uppercase rounded transition-all duration-300 cursor-pointer shadow-[0_0_10px_rgba(245,165,36,0.15)] hover:shadow-[0_0_20px_rgba(245,165,36,0.4)] text-center focus:outline-none z-30"
+          >
+            [ CLICK HERE TO REGISTER ]
+          </a>
         </motion.div>
 
         {/* Bottom: Scroll Prompt */}

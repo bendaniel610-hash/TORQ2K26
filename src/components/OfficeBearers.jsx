@@ -9,7 +9,7 @@ export default function OfficeBearers() {
     { name: 'MUJAHID', role: 'PUBLIC RELATIONS OFFICER', code: 'OB-03 // PRO' },
     { name: 'KATHERIN JULIET', role: 'TREASURER', code: 'OB-04 // TREAS' },
     { name: 'ANDREW SAM', role: 'PUBLICITY & COMMUNICATIONS', code: 'OB-05 // PUB_COMM' },
-    { name: 'ADELIN SHWETA', role: 'GENERAL SECRETARY', code: 'OB-06 // GEN_SEC' },
+    { name: 'ADELINE SHWETA', role: 'GENERAL SECRETARY', code: 'OB-06 // GEN_SEC' },
   ];
 
   const containerVariants = {
@@ -52,7 +52,7 @@ export default function OfficeBearers() {
             REGISTRY_DIRECTORY // SECURE_LIST
           </div>
           <h2 className="text-3xl font-black text-tva-orange tracking-widest uppercase tva-glow-text">
-            OFFICE BEARERS
+            TIME KEEPERS
           </h2>
           <div className="h-[1px] w-16 bg-tva-orange mx-auto mt-4 shadow-[0_0_8px_#F5A524]" />
         </div>

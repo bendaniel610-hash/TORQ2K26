@@ -9,11 +9,37 @@ import { Volume2, VolumeX, ShieldAlert, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tvaThemeMusic from './assets/piq_site_music.mp3';
 import introVideo from './assets/torq_intro.mp4';
+import mobileIntroVideo from './assets/intro_mobile_version.mp4';
+import licetLogo from './assets/licet_logo.png';
+import armeLogo from './assets/arme_logo.png';
+
+// Custom Instagram SVG component for version stability
+const Instagram = ({ size = 24, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
 
 export default function App() {
   const [isBooted, setIsBooted] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(introVideo);
+  const [showLogo, setShowLogo] = useState(true);
+  const [showSkipButton, setShowSkipButton] = useState(false);
   const audioRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -31,14 +57,52 @@ export default function App() {
   // Start Intro Video (with sound)
   const startBoot = () => {
     setIsBooted(true);
+    setShowSkipButton(false);
   };
 
-  // Play the video once it is booted and mounted
+  const handleTimeUpdate = (e) => {
+    const video = e.target;
+    if (video && video.duration) {
+      if (video.currentTime >= video.duration / 2) {
+        setShowSkipButton(true);
+      }
+    }
+  };
+
+  // Switch video src depending on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVideoSrc(mobileIntroVideo);
+      } else {
+        setVideoSrc(introVideo);
+      }
+    };
+    handleResize(); // trigger initially
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Handle logo visibility on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 120) {
+        setShowLogo(true);
+      } else {
+        setShowLogo(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Play the video once it is booted and mounted or source changes
   useEffect(() => {
     if (isBooted && videoRef.current) {
+      videoRef.current.load();
       videoRef.current.play().catch(err => console.log("Video playback failed:", err));
     }
-  }, [isBooted]);
+  }, [isBooted, videoSrc]);
 
   // Handle Intro End or Skip
   const handleIntroEnd = () => {
@@ -112,19 +176,22 @@ export default function App() {
           >
             <video
               ref={videoRef}
-              src={introVideo}
-              className="w-full h-full object-contain bg-black"
+              src={videoSrc}
+              className="w-full h-full object-cover bg-black"
               onEnded={handleIntroEnd}
+              onTimeUpdate={handleTimeUpdate}
               autoPlay
               playsInline
             />
-            {/* Skip video control details */}
-            <button
-              onClick={handleIntroEnd}
-              className="fixed bottom-8 right-8 z-50 border border-tva-orange bg-black/80 text-tva-orange hover:bg-tva-orange hover:text-black px-4 py-2 font-black text-xs tracking-widest rounded transition-all uppercase cursor-pointer backdrop-blur shadow-[0_0_15px_rgba(245,165,36,0.2)] focus:outline-none"
-            >
-              [ SKIP_BOOT ]
-            </button>
+            {/* Skip video control details - shows halfway through */}
+            {showSkipButton && (
+              <button
+                onClick={handleIntroEnd}
+                className="fixed bottom-8 right-8 z-50 border border-tva-orange bg-black/80 text-tva-orange hover:bg-tva-orange hover:text-black px-4 py-2 font-black text-xs tracking-widest rounded transition-all uppercase cursor-pointer backdrop-blur shadow-[0_0_15px_rgba(245,165,36,0.2)] focus:outline-none"
+              >
+                [ SKIP_BOOT ]
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -136,6 +203,23 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
+          {/* Top Left Branding Logos */}
+          <AnimatePresence>
+            {showLogo && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="fixed top-4 left-4 z-40 flex items-center gap-4 bg-black/45 backdrop-blur-md border border-tva-orange/20 px-4 py-2 rounded shadow-[0_0_15px_rgba(245,165,36,0.15)] select-none pointer-events-auto"
+              >
+                <img src={licetLogo} alt="LICET Logo" className="h-10 sm:h-14 w-auto object-contain filter brightness-110" />
+                <div className="w-[2px] h-8 bg-tva-orange/30" />
+                <img src={armeLogo} alt="ARME Logo" className="h-10 sm:h-14 w-auto object-contain filter brightness-110" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Core Website Components */}
           <Navbar />
           
@@ -158,6 +242,21 @@ export default function App() {
                 <Cpu size={12} className="text-tva-orange animate-pulse" />
                 <span className="text-tva-orange/70 uppercase">TORQ MAIN TERMINAL CLIENT: V2.2.6</span>
               </div>
+
+              {/* Social/Contact Section */}
+              <div className="flex flex-col items-center space-y-2 border border-tva-orange/10 p-3 rounded bg-tva-nearblack/30 backdrop-blur-sm max-w-xs w-full">
+                <span className="text-[8px] text-tva-orange/40 tracking-widest uppercase font-bold">// CONTACT & UPDATES</span>
+                <a 
+                  href="https://www.instagram.com/arme_licet?igsh=MXI3bDFnOXJ2OXhwcA==" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center space-x-2 border border-tva-orange/30 hover:border-tva-orange px-4 py-1.5 rounded bg-tva-orange/5 hover:bg-tva-orange/15 transition-all text-tva-orange cursor-pointer shadow-[0_0_10px_rgba(245,165,36,0.1)]"
+                >
+                  <Instagram size={12} className="text-tva-amber animate-pulse" />
+                  <span className="text-[9px] font-black uppercase tracking-widest">INSTAGRAM</span>
+                </a>
+              </div>
+
               <p className="uppercase">
                 © 2026 LOYOLA-ICAM COLLEGE OF ENGINEERING & TECHNOLOGY (LICET) | DEPT OF MECHANICAL ENGINEERING
               </p>
