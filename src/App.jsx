@@ -7,6 +7,7 @@ import Events from './components/Events';
 import OfficeBearers from './components/OfficeBearers';
 import { Volume2, VolumeX, ShieldAlert, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import tvaThemeMusic from './assets/piq_site_music.mp3';
 import introVideo from './assets/torq_intro.mp4';
 import mobileIntroVideo from './assets/intro_mobile_version.mp4';
@@ -293,6 +294,7 @@ export default function App() {
           </div>
         </motion.div>
       )}
+      <Analytics />
     </div>
   );
 }
