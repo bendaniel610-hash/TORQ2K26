@@ -40,6 +40,7 @@ export default function App() {
   const [videoSrc, setVideoSrc] = useState(introVideo);
   const [showLogo, setShowLogo] = useState(true);
   const [showSkipButton, setShowSkipButton] = useState(false);
+  const [isEventLogOpen, setIsEventLogOpen] = useState(false);
   const audioRef = useRef(null);
   const videoRef = useRef(null);
 
@@ -230,7 +231,7 @@ export default function App() {
           <div className="relative z-10 bg-black">
             <About />
             <VisionMission />
-            <Events />
+            <Events onEventSelectChange={setIsEventLogOpen} />
             <OfficeBearers />
           </div>
 
@@ -267,30 +268,40 @@ export default function App() {
           </footer>
 
           {/* Floating Retro TVA Audio Deck */}
-          <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-2 bg-black/90 border border-tva-orange/40 p-2.5 rounded shadow-[0_0_15px_rgba(245,165,36,0.25)] hover:border-tva-orange transition-colors">
-            <div className="flex flex-col text-[8px] text-tva-orange/70 font-bold uppercase tracking-wider pr-2 border-r border-tva-orange/20">
-              <span className="text-tva-orange flex items-center gap-1 font-black">
-                <ShieldAlert size={10} className="text-tva-amber animate-pulse" /> TVA_AUDIO
-              </span>
-              <span className="text-[7px] text-tva-orange/40 mt-0.5">THEME_MONITOR</span>
-            </div>
-            
-            {/* Waveform indicator */}
-            <div className="flex items-end space-x-0.5 h-4 px-2 w-10 justify-center">
-              <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.8s_infinite_0.1s]' : 'h-1'}`} style={{ height: isPlaying ? '100%' : '3px' }} />
-              <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.6s_infinite_0.2s]' : 'h-2'}`} style={{ height: isPlaying ? '70%' : '6px' }} />
-              <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.9s_infinite_0.3s]' : 'h-1'}`} style={{ height: isPlaying ? '90%' : '4px' }} />
-            </div>
+          <AnimatePresence>
+            {!isEventLogOpen && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 flex items-center space-x-2 bg-black/90 border border-tva-orange/40 p-1.5 md:p-2.5 rounded-full md:rounded shadow-[0_0_15px_rgba(245,165,36,0.25)] hover:border-tva-orange transition-colors"
+              >
+                <div className="hidden md:flex flex-col text-[8px] text-tva-orange/70 font-bold uppercase tracking-wider pr-2 border-r border-tva-orange/20">
+                  <span className="text-tva-orange flex items-center gap-1 font-black">
+                    <ShieldAlert size={10} className="text-tva-amber animate-pulse" /> TVA_AUDIO
+                  </span>
+                  <span className="text-[7px] text-tva-orange/40 mt-0.5">THEME_MONITOR</span>
+                </div>
+                
+                {/* Waveform indicator */}
+                <div className="hidden md:flex items-end space-x-0.5 h-4 px-2 w-10 justify-center">
+                  <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.8s_infinite_0.1s]' : 'h-1'}`} style={{ height: isPlaying ? '100%' : '3px' }} />
+                  <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.6s_infinite_0.2s]' : 'h-2'}`} style={{ height: isPlaying ? '70%' : '6px' }} />
+                  <span className={`w-0.5 bg-tva-orange transition-all duration-150 ${isPlaying ? 'animate-[bounce_0.9s_infinite_0.3s]' : 'h-1'}`} style={{ height: isPlaying ? '90%' : '4px' }} />
+                </div>
 
-            {/* Play/Pause Button */}
-            <button
-              onClick={togglePlay}
-              className="p-1.5 rounded bg-tva-orange/10 border border-tva-orange/30 text-tva-orange hover:bg-tva-orange/20 hover:border-tva-orange transition-colors shadow-inner"
-              title={isPlaying ? "Mute TVA Terminal Audio" : "Play TVA Terminal Audio"}
-            >
-              {isPlaying ? <Volume2 size={14} className="animate-pulse" /> : <VolumeX size={14} />}
-            </button>
-          </div>
+                {/* Play/Pause Button */}
+                <button
+                  onClick={togglePlay}
+                  className="p-1.5 rounded-full md:rounded bg-tva-orange/10 border border-tva-orange/30 text-tva-orange hover:bg-tva-orange/20 hover:border-tva-orange transition-colors shadow-inner"
+                  title={isPlaying ? "Mute TVA Terminal Audio" : "Play TVA Terminal Audio"}
+                >
+                  {isPlaying ? <Volume2 size={14} className="animate-pulse" /> : <VolumeX size={14} />}
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
     </div>

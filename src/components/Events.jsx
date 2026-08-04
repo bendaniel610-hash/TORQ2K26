@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tempadImg from '../assets/tempad.png';
 
-export default function Events() {
+export default function Events({ onEventSelectChange }) {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     if (selectedEvent) {
       document.body.style.overflow = 'hidden';
+      if (onEventSelectChange) onEventSelectChange(true);
     } else {
       document.body.style.overflow = '';
+      if (onEventSelectChange) onEventSelectChange(false);
     }
     return () => {
       document.body.style.overflow = '';
+      if (onEventSelectChange) onEventSelectChange(false);
     };
-  }, [selectedEvent]);
+  }, [selectedEvent, onEventSelectChange]);
 
   const eventList = [
     {
