@@ -206,7 +206,7 @@ export default function App() {
         >
           {/* Top Left Branding Logos */}
           <AnimatePresence>
-            {showLogo && (
+            {showLogo && !isEventLogOpen && (
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -222,7 +222,7 @@ export default function App() {
           </AnimatePresence>
 
           {/* Core Website Components */}
-          <Navbar />
+          {!isEventLogOpen && <Navbar />}
           
           {/* Hero takes full scroll space first */}
           <Hero />
@@ -275,7 +275,7 @@ export default function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.2 }}
-                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 flex items-center space-x-2 bg-black/90 border border-tva-orange/40 p-1.5 md:p-2.5 rounded-full md:rounded shadow-[0_0_15px_rgba(245,165,36,0.25)] hover:border-tva-orange transition-colors"
+                className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 flex items-center justify-center md:justify-start md:space-x-2 bg-black/90 border border-tva-orange/40 w-9 h-9 md:w-auto md:h-auto p-0 md:p-2.5 rounded-full md:rounded shadow-[0_0_15px_rgba(245,165,36,0.25)] hover:border-tva-orange transition-colors"
               >
                 <div className="hidden md:flex flex-col text-[8px] text-tva-orange/70 font-bold uppercase tracking-wider pr-2 border-r border-tva-orange/20">
                   <span className="text-tva-orange flex items-center gap-1 font-black">

@@ -6,9 +6,9 @@ export default function OfficeBearers() {
   const bearers = [
     { name: 'RAVEESHWAR', role: 'PRESIDENT', code: 'OB-01 // PRES' },
     { name: 'BOOMIKA', role: 'VICE-PRESIDENT', code: 'OB-02 // V_PRES' },
-    { name: 'MUJAHID', role: 'PUBLIC RELATIONS OFFICER', code: 'OB-03 // PRO' },
-    { name: 'KATHERIN JULIET', role: 'TREASURER', code: 'OB-04 // TREAS' },
-    { name: 'ANDREW SAM', role: 'PUBLICITY & COMMUNICATIONS', code: 'OB-05 // PUB_COMM' },
+    { name: 'ANDREW SAM', role: 'MEDIA HEAD', code: 'OB-03 // MEDIA_HEAD' },
+    { name: 'KATHARIN JULIOT', role: 'TREASURER', code: 'OB-04 // TREAS' },
+    { name: 'MUJAHID', role: 'PUBLIC RELATIONS OFFICER', code: 'OB-05 // PRO' },
     { name: 'ADELINE SHWETA', role: 'GENERAL SECRETARY', code: 'OB-06 // GEN_SEC' },
   ];
 

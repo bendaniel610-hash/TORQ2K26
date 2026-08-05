@@ -91,6 +91,11 @@ export default function Hero() {
             <span className="text-[9px] sm:text-[11px] text-tva-orange/60 tracking-[0.15em] mt-2 border-t border-tva-orange/20 pt-2 px-4 font-bold">[ JOINTLY PRESENTS ]</span>
           </div>
 
+          {/* Theme display */}
+          <div className="text-[10px] sm:text-[11px] md:text-xs font-bold text-tva-amber tracking-[0.15em] uppercase mt-6 mb-2 max-w-lg mx-auto border border-tva-orange/25 px-4 py-2 bg-tva-orange/5 rounded shadow-[0_0_10px_rgba(245,165,36,0.1)]">
+            THEME: "Accelerating the momentum to net zero"
+          </div>
+
           {/* Click Here to Register button */}
           <a
             href="https://forms.gle/r4vCfcco7F1t38hd7"

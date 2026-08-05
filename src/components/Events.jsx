@@ -44,10 +44,10 @@ export default function Events({ onEventSelectChange }) {
       date: 'August 8, 2026',
       time: '11:00 AM - 12:30 PM',
       venue: 'H21',
-      description: 'A national-level Computer-Aided Design (CAD) competition where aspiring engineers showcase design skills and creativity through feature-based 3D modeling using SOLIDWORKS.',
+      description: 'A national-level Computer-Aided Design (CAD) competition where aspiring engineers showcase design skills and creativity through feature-based 3D modeling. Please note that SOLIDWORKS is the only software to be used for this competition.',
       rules: [
         'Individual competition open to all undergraduate engineering students.',
-        'Conducted using SOLIDWORKS on the systems provided.',
+        'Conducted using SOLIDWORKS as the only software on the systems provided.',
         'Evaluated on accuracy, design intent, completion time, and overall model quality.',
         'Mobile phones, AI tools, and internet browsing are strictly prohibited.',
       ],
@@ -109,7 +109,7 @@ export default function Events({ onEventSelectChange }) {
       name: 'IOT HACKATHON - IRON CODE',
       subtitle: 'IoT System Development Hackathon',
       date: 'August 8, 2026',
-      time: '1:30 PM - 3:55 PM',
+      time: '1:35 PM - 3:55 PM',
       venue: 'Daikin COE',
       description: 'An IoT hackathon designed to test technical knowledge, problem-solving, and hands-on programming skills. Teams attempt a technical quiz before designing and coding an IoT solution to a given problem statement.',
       rules: [
@@ -171,6 +171,9 @@ export default function Events({ onEventSelectChange }) {
           <h2 className="text-3xl font-black text-tva-orange tracking-widest uppercase tva-glow-text">
             SEC-04: EVENT CONSOLE
           </h2>
+          <div className="text-[10px] sm:text-xs text-tva-orange/60 tracking-wider mt-2 uppercase">
+            [ Interactive Image - click screen hot zones to view details ]
+          </div>
           <div className="h-[1px] w-16 bg-tva-orange mx-auto mt-4 shadow-[0_0_8px_#F5A524]" />
         </div>
 

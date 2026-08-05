@@ -91,10 +91,10 @@ export default function About() {
                   SUB_LOG_01: ABOUT_TORQ
                 </h3>
               </div>
-              <p className="text-tva-orange/80 leading-relaxed text-sm text-justify">
+              <p className="text-tva-orange/85 leading-relaxed text-sm text-justify">
                 TORQ is the flagship annual national-level technical symposium of the Department of Mechanical Engineering 
                 at Loyola-ICAM College of Engineering and Technology (LICET), organized in association with A.R.M.E 
-                (Association of Royal Mechanical Engineers). It brings together students, innovators, and industry professionals 
+                (Association of Radiant Mechanical Engineers). It brings together students, innovators, and industry professionals 
                 through competitive challenges, design showcases, workshops, and discussions. It serves as a creative crucible 
                 where future-focused engineering paradigms are forged, providing students a launchpad to demonstrate technical 
                 acumen and address modern challenges.
