@@ -93,7 +93,7 @@ export default function Hero() {
 
           {/* Theme display */}
           <div className="text-[10px] sm:text-[11px] md:text-xs font-bold text-tva-amber tracking-[0.15em] uppercase mt-6 mb-2 max-w-lg mx-auto border border-tva-orange/25 px-4 py-2 bg-tva-orange/5 rounded shadow-[0_0_10px_rgba(245,165,36,0.1)]">
-            THEME: "Accelerating the momentum to net zero"
+            "Accelerating the momentum to net zero"
           </div>
 
           {/* Click Here to Register button */}

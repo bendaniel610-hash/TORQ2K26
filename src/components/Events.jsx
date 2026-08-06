@@ -110,7 +110,7 @@ export default function Events({ onEventSelectChange }) {
       subtitle: 'IoT System Development Hackathon',
       date: 'August 8, 2026',
       time: '1:35 PM - 3:55 PM',
-      venue: 'Daikin COE',
+      venue: 'H21 (CAD LAB)',
       description: 'An IoT hackathon designed to test technical knowledge, problem-solving, and hands-on programming skills. Teams attempt a technical quiz before designing and coding an IoT solution to a given problem statement.',
       rules: [
         'Teams of 2–4 members. Open to all undergraduate/diploma engineering students.',
