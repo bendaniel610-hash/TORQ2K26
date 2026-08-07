@@ -24,6 +24,7 @@ export default {
         'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
         'crt-turn-on': 'crtTurnOn 0.5s ease-out forwards',
         'scanline-anim': 'scanline 6s linear infinite',
+        'marquee': 'marquee 25s linear infinite',
       },
       keyframes: {
         flicker: {
@@ -42,6 +43,10 @@ export default {
         scanline: {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100%)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0%)' },
         }
       }
     },

@@ -42,6 +42,11 @@ src/assets/*
 !src/assets/licet_logo.png
 !src/assets/arme_logo.png
 !src/assets/intro_mobile_version.mp4
+!src/assets/sp1.jpeg
+!src/assets/sp2.PNG
+!src/assets/sp3.jpeg
+!src/assets/sp4.PNG
+!src/assets/sp5.jpeg
 
 # Root level unused duplicates
 /navbar.png

@@ -5,6 +5,7 @@ import About from './components/About';
 import VisionMission from './components/VisionMission';
 import Events from './components/Events';
 import OfficeBearers from './components/OfficeBearers';
+import Sponsors from './components/Sponsors';
 import { Volume2, VolumeX, ShieldAlert, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import tvaThemeMusic from './assets/piq_site_music.mp3';
@@ -233,6 +234,7 @@ export default function App() {
             <VisionMission />
             <Events onEventSelectChange={setIsEventLogOpen} />
             <OfficeBearers />
+            <Sponsors />
           </div>
 
           {/* Footer */}
