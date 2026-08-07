@@ -59,34 +59,48 @@ export default function Sponsors() {
             <div className="flex w-max animate-marquee">
               {/* First Track Copy */}
               <div className="flex shrink-0 items-center gap-6 md:gap-10 px-3 md:px-5">
-                {sponsorList.map((sponsor, idx) => (
-                  <div
-                    key={`track1-${sponsor.id}-${idx}`}
-                    className="w-32 h-16 md:w-40 md:h-20 bg-white/95 rounded flex items-center justify-center p-3 md:p-4 border border-tva-orange/30 hover:border-tva-orange hover:shadow-[0_0_15px_rgba(245,165,36,0.35)] transition-all duration-300 hover:scale-105 group cursor-pointer"
-                  >
-                    <img
-                      src={sponsor.src}
-                      alt={sponsor.name}
-                      className="max-w-full max-h-full object-contain filter brightness-95 group-hover:brightness-100 transition-all duration-300"
-                    />
-                  </div>
-                ))}
+                {sponsorList.map((sponsor, idx) => {
+                  const isJpeg = sponsor.src.toLowerCase().includes('jpeg') || sponsor.src.toLowerCase().includes('jpg');
+                  return (
+                    <div
+                      key={`track1-${sponsor.id}-${idx}`}
+                      className="w-32 h-16 md:w-40 md:h-20 flex items-center justify-center p-2 transition-all duration-300 hover:scale-110 group cursor-pointer"
+                    >
+                      <img
+                        src={sponsor.src}
+                        alt={sponsor.name}
+                        className={`max-w-full max-h-full object-contain transition-all duration-300 ${
+                          isJpeg
+                            ? 'invert brightness-125 contrast-120 mix-blend-screen'
+                            : 'brightness-90 hover:brightness-100'
+                        }`}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Second Track Copy */}
               <div className="flex shrink-0 items-center gap-6 md:gap-10 px-3 md:px-5">
-                {sponsorList.map((sponsor, idx) => (
-                  <div
-                    key={`track2-${sponsor.id}-${idx}`}
-                    className="w-32 h-16 md:w-40 md:h-20 bg-white/95 rounded flex items-center justify-center p-3 md:p-4 border border-tva-orange/30 hover:border-tva-orange hover:shadow-[0_0_15px_rgba(245,165,36,0.35)] transition-all duration-300 hover:scale-105 group cursor-pointer"
-                  >
-                    <img
-                      src={sponsor.src}
-                      alt={sponsor.name}
-                      className="max-w-full max-h-full object-contain filter brightness-95 group-hover:brightness-100 transition-all duration-300"
-                    />
-                  </div>
-                ))}
+                {sponsorList.map((sponsor, idx) => {
+                  const isJpeg = sponsor.src.toLowerCase().includes('jpeg') || sponsor.src.toLowerCase().includes('jpg');
+                  return (
+                    <div
+                      key={`track2-${sponsor.id}-${idx}`}
+                      className="w-32 h-16 md:w-40 md:h-20 flex items-center justify-center p-2 transition-all duration-300 hover:scale-110 group cursor-pointer"
+                    >
+                      <img
+                        src={sponsor.src}
+                        alt={sponsor.name}
+                        className={`max-w-full max-h-full object-contain transition-all duration-300 ${
+                          isJpeg
+                            ? 'invert brightness-125 contrast-120 mix-blend-screen'
+                            : 'brightness-90 hover:brightness-100'
+                        }`}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
