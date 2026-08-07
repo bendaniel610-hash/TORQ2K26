@@ -47,6 +47,13 @@ src/assets/*
 !src/assets/sp3.jpeg
 !src/assets/sp4.PNG
 !src/assets/sp5.jpeg
+!src/assets/sp1.png
+!src/assets/sp2.png
+!src/assets/sp3.png
+!src/assets/sp4.png
+!src/assets/sp5.png
+!src/assets/sp6.png
+!src/assets/sp6.jpeg
 
 # Root level unused duplicates
 /navbar.png

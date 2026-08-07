@@ -215,8 +215,8 @@ export default function App() {
                 transition={{ duration: 0.3 }}
                 className="fixed top-4 left-4 z-40 flex items-center gap-4 bg-black/45 backdrop-blur-md border border-tva-orange/20 px-4 py-2 rounded shadow-[0_0_15px_rgba(245,165,36,0.15)] select-none pointer-events-auto"
               >
-                <img src={licetLogo} alt="LICET Logo" className="h-10 sm:h-14 w-auto object-contain filter brightness-110" />
-                <div className="w-[2px] h-8 bg-tva-orange/30" />
+                <img src={licetLogo} alt="LICET Logo" className="h-14 sm:h-[72px] w-auto object-contain filter brightness-110" />
+                <div className="w-[2px] h-10 bg-tva-orange/30" />
                 <img src={armeLogo} alt="ARME Logo" className="h-10 sm:h-14 w-auto object-contain filter brightness-110" />
               </motion.div>
             )}

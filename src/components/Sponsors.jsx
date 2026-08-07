@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Terminal } from 'lucide-react';
+import { Terminal, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Import sponsor images
-import sp1 from '../assets/sp1.jpeg';
-import sp2 from '../assets/sp2.PNG';
-import sp3 from '../assets/sp3.jpeg';
-import sp4 from '../assets/sp4.PNG';
-import sp5 from '../assets/sp5.jpeg';
+// Import processed PNG sponsor images (with transparent backgrounds)
+import sp1 from '../assets/sp1.png';
+import sp2 from '../assets/sp2.png';
+import sp3 from '../assets/sp3.png';
+import sp4 from '../assets/sp4.png';
+import sp5 from '../assets/sp5.png';
+import sp6 from '../assets/sp6.png';
 
 export default function Sponsors() {
   const sponsors = [
@@ -16,13 +17,97 @@ export default function Sponsors() {
     { id: 'sp3', src: sp3, name: 'Sponsor 3' },
     { id: 'sp4', src: sp4, name: 'Sponsor 4' },
     { id: 'sp5', src: sp5, name: 'Sponsor 5' },
+    { id: 'sp6', src: sp6, name: 'Sponsor 6' },
   ];
 
-  // Triplicate the sponsors list to ensure seamless looping without gaps on ultra-wide monitors
-  const sponsorList = [...sponsors, ...sponsors, ...sponsors];
+  // We loop the sponsors array three times to enable seamless endless scrolling
+  const extendedSponsors = [...sponsors, ...sponsors, ...sponsors];
+
+  // State to track current centered item index
+  // We start in the middle copy (at index = sponsors.length)
+  const [currentIndex, setCurrentIndex] = useState(sponsors.length);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  
+  // Track viewport container dimensions for centering calculations
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+    }
+    const handleResize = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Responsive sizes: logo item width + spacing
+  const itemWidth = isMobile ? 120 : 180;
+  const gap = isMobile ? 24 : 48;
+
+  // Slide left-to-right (active index decreases, moving track to the right)
+  const slideLeftToRight = () => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  // Slide right-to-left (active index increases, moving track to the left)
+  const slideRightToLeft = () => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  // Auto-slide setup
+  useEffect(() => {
+    timerRef.current = setInterval(slideLeftToRight, 3000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const handleInteractiveSlide = (dir) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (dir === 'right') {
+      slideRightToLeft();
+    } else {
+      slideLeftToRight();
+    }
+    // Resume auto-slide
+    timerRef.current = setInterval(slideLeftToRight, 3000);
+  };
+
+  // Infinite looping wrap-around effect
+  useEffect(() => {
+    if (currentIndex < sponsors.length) {
+      // Jump forward to the same element in the middle set
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(currentIndex + sponsors.length);
+      }, 500); // matches spring transition
+      return () => clearTimeout(timer);
+    } else if (currentIndex >= sponsors.length * 2) {
+      // Jump backward to the same element in the middle set
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(currentIndex - sponsors.length);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [currentIndex, sponsors.length]);
+
+  // Center position offset calculation
+  const xOffset = containerWidth / 2 - currentIndex * (itemWidth + gap) - itemWidth / 2;
 
   return (
-    <section id="sponsors" className="relative py-16 px-6 bg-black select-none font-mono z-10 border-t border-tva-orange/10">
+    <section id="sponsors" className="relative py-16 px-6 bg-black select-none font-mono z-10 border-t border-tva-orange/10 overflow-hidden">
       <div className="absolute inset-0 tva-grid-bg opacity-10 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -38,71 +123,77 @@ export default function Sponsors() {
           <div className="h-[1px] w-16 bg-tva-orange mx-auto mt-4 shadow-[0_0_8px_#F5A524]" />
         </div>
 
-        {/* Marquee Panel Container */}
-        <div className="relative border border-tva-orange/20 rounded-md bg-tva-nearblack/90 p-4 md:p-6 overflow-hidden tva-glow-border">
-          {/* Console Header details */}
-          <div className="text-[9px] text-tva-orange/40 pb-2 mb-4 tracking-wider flex items-center justify-between border-b border-tva-orange/10 font-bold uppercase">
-            <span>[TIMELINE_SUPPORT_NODE // MARQUEE_ACTIVE]</span>
-            <span className="flex items-center gap-1">
-              <Cpu size={10} className="text-tva-orange animate-spin" />
-              STATUS: CONTINUOUS_FLOW
-            </span>
-          </div>
+        {/* Carousel Component (Tile removed, direct black transparent flow) */}
+        <div ref={containerRef} className="relative w-full flex items-center justify-center py-12">
+          {/* Navigation Controls */}
+          <button
+            onClick={() => handleInteractiveSlide('left')}
+            className="absolute left-0 md:left-4 z-30 p-2 rounded-full border border-tva-orange/30 bg-black/70 text-tva-orange hover:bg-tva-orange hover:text-black hover:border-tva-orange transition-all duration-300 shadow-[0_0_10px_rgba(245,165,36,0.15)] focus:outline-none"
+            aria-label="Previous Sponsor"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          
+          <button
+            onClick={() => handleInteractiveSlide('right')}
+            className="absolute right-0 md:right-4 z-30 p-2 rounded-full border border-tva-orange/30 bg-black/70 text-tva-orange hover:bg-tva-orange hover:text-black hover:border-tva-orange transition-all duration-300 shadow-[0_0_10px_rgba(245,165,36,0.15)] focus:outline-none"
+            aria-label="Next Sponsor"
+          >
+            <ChevronRight size={20} />
+          </button>
 
-          {/* Left and Right Gradient Fades */}
-          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-tva-nearblack/95 to-transparent z-20 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-tva-nearblack/95 to-transparent z-20 pointer-events-none" />
+          {/* Left and Right Blur/Fade Gradients */}
+          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-          {/* Scrolling Marquee Container */}
-          <div className="relative flex overflow-hidden w-full py-2">
-            {/* The infinite marquee track */}
-            <div className="flex w-max animate-marquee">
-              {/* First Track Copy */}
-              <div className="flex shrink-0 items-center gap-6 md:gap-10 px-3 md:px-5">
-                {sponsorList.map((sponsor, idx) => {
-                  const isJpeg = sponsor.src.toLowerCase().includes('jpeg') || sponsor.src.toLowerCase().includes('jpg');
-                  return (
-                    <div
-                      key={`track1-${sponsor.id}-${idx}`}
-                      className="w-32 h-16 md:w-40 md:h-20 flex items-center justify-center p-2 transition-all duration-300 hover:scale-110 group cursor-pointer"
+          {/* Slider Viewport */}
+          <div className="w-full overflow-hidden flex items-center h-48 md:h-56">
+            <motion.div
+              className="flex items-center"
+              style={{
+                gap: `${gap}px`,
+                width: `${extendedSponsors.length * (itemWidth + gap)}px`,
+              }}
+              animate={{ x: xOffset }}
+              transition={
+                isTransitioning
+                  ? { type: 'spring', stiffness: 120, damping: 20 }
+                  : { duration: 0 }
+              }
+            >
+              {extendedSponsors.map((sponsor, idx) => {
+                const isActive = idx === currentIndex;
+                
+                return (
+                  <div
+                    key={`carousel-${sponsor.id}-${idx}`}
+                    className="flex-shrink-0 flex items-center justify-center p-3"
+                    style={{
+                      width: `${itemWidth}px`,
+                      height: isMobile ? '100px' : '140px',
+                    }}
+                  >
+                    <motion.div
+                      animate={{
+                        scale: isActive ? 1.35 : 0.85,
+                        opacity: isActive ? 1 : 0.35,
+                        filter: isActive 
+                          ? 'drop-shadow(0 0 15px rgba(245, 165, 36, 0.4)) brightness(1.15)'
+                          : 'drop-shadow(0 0 0px rgba(0,0,0,0)) brightness(0.95)',
+                      }}
+                      transition={{ type: 'spring', stiffness: 120, damping: 15 }}
+                      className="w-full h-full flex items-center justify-center"
                     >
                       <img
                         src={sponsor.src}
                         alt={sponsor.name}
-                        className={`max-w-full max-h-full object-contain transition-all duration-300 ${
-                          isJpeg
-                            ? 'invert brightness-125 contrast-120 mix-blend-screen'
-                            : 'brightness-90 hover:brightness-100'
-                        }`}
+                        className="max-w-full max-h-full object-contain filter contrast-105"
                       />
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Second Track Copy */}
-              <div className="flex shrink-0 items-center gap-6 md:gap-10 px-3 md:px-5">
-                {sponsorList.map((sponsor, idx) => {
-                  const isJpeg = sponsor.src.toLowerCase().includes('jpeg') || sponsor.src.toLowerCase().includes('jpg');
-                  return (
-                    <div
-                      key={`track2-${sponsor.id}-${idx}`}
-                      className="w-32 h-16 md:w-40 md:h-20 flex items-center justify-center p-2 transition-all duration-300 hover:scale-110 group cursor-pointer"
-                    >
-                      <img
-                        src={sponsor.src}
-                        alt={sponsor.name}
-                        className={`max-w-full max-h-full object-contain transition-all duration-300 ${
-                          isJpeg
-                            ? 'invert brightness-125 contrast-120 mix-blend-screen'
-                            : 'brightness-90 hover:brightness-100'
-                        }`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </motion.div>
           </div>
         </div>
       </div>
