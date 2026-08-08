@@ -12,12 +12,12 @@ import sp6 from '../assets/sp6.png';
 
 export default function Sponsors() {
   const sponsors = [
-    { id: 'sp1', src: sp1, name: 'Sponsor 1' },
-    { id: 'sp2', src: sp2, name: 'Sponsor 2' },
-    { id: 'sp3', src: sp3, name: 'Sponsor 3' },
-    { id: 'sp4', src: sp4, name: 'Sponsor 4' },
-    { id: 'sp5', src: sp5, name: 'Sponsor 5' },
-    { id: 'sp6', src: sp6, name: 'Sponsor 6' },
+    { id: 'sp1', src: sp1, name: 'NOARCH' },
+    { id: 'sp2', src: sp2, name: 'Sakthi Metals' },
+    { id: 'sp3', src: sp3, name: 'Liberty Leather Stores' },
+    { id: 'sp4', src: sp4, name: 'Sharon Enterprises' },
+    { id: 'sp5', src: sp5, name: 'MSI' },
+    { id: 'sp6', src: sp6, name: 'Trumen & Threads' },
   ];
 
   // We loop the sponsors array three times to enable seamless endless scrolling
